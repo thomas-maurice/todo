@@ -252,7 +252,7 @@ if __name__ == "__main__":
 		if sys.argv[1] == "rm":
 			t.remove_todo_by_id(sys.argv[2])
 			t.save()
-		if sys.argv[1] == "st":
+		if sys.argv[1] == "sh":
 			l = t.get_todos_by_tag(sys.argv[2])
 			l = t.sort_todos_by_id(l)
 			t.print_todos(l)
