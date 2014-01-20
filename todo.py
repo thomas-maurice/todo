@@ -149,9 +149,10 @@ class TodoList:
 		if todo_list == None:
 			todo_list = self.todo_list
 			
-		for t in todo_list:
-			if int(t.attributes["id"].value) == int(i):
-				return t
+		for e in self.todo_file.firstChild.childNodes:
+			if e.nodeType == e.ELEMENT_NODE:
+				if int(e.attributes["id"].value) == int(i):
+					return e
 		
 		return None
 	
@@ -194,6 +195,8 @@ class TodoList:
 				text[i] = colored(text[i], "green")
 			elif text[i][0] == '+':
 				text[i] = colored(text[i], "magenta")
+			elif text[i][0] == '@':
+				text[i] = colored(text[i], "yellow")
 		return " ".join(text)
 				
 	
