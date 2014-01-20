@@ -156,12 +156,12 @@ class TodoList:
 		
 		return None
 	
-	def get_todos_by_tag(self, tag):
+	def get_todos_by_tag(self, tag, marker="#"):
 		"""
-			Search all the todos which match the hashtag given
+			Search all the todos which match the given tag
 		"""
-		if tag[0] != '#':
-			tag = "#"+tag
+		if tag[0] != marker:
+			tag = marker+tag
 		
 		l = []
 		
@@ -169,7 +169,7 @@ class TodoList:
 			if e.nodeType == e.ELEMENT_NODE:
 				text = e.attributes["task"].value.split(" ")
 				for i in range(0, len(text)):
-					if text[i][0] == '#':
+					if text[i][0] == marker:
 						if text[i].lower() == tag.lower():
 							l.append(e)
 		
@@ -254,6 +254,10 @@ if __name__ == "__main__":
 			t.save()
 		if sys.argv[1] == "st":
 			l = t.get_todos_by_tag(sys.argv[2])
+			l = t.sort_todos_by_id(l)
+			t.print_todos(l)
+		if sys.argv[1] == "sc":
+			l = t.get_todos_by_tag(sys.argv[2], "+")
 			l = t.sort_todos_by_id(l)
 			t.print_todos(l)
 			
