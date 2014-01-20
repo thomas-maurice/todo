@@ -260,4 +260,8 @@ if __name__ == "__main__":
 			l = t.get_todos_by_tag(sys.argv[2], "+")
 			l = t.sort_todos_by_id(l)
 			t.print_todos(l)
+		if sys.argv[1] == "sp":
+			l = t.get_todos_by_tag(sys.argv[2], "@")
+			l = t.sort_todos_by_id(l)
+			t.print_todos(l)
 			
