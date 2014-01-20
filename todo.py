@@ -237,8 +237,11 @@ if __name__ == "__main__":
 	if len(sys.argv) == 1:
 		print "Help for", sys.argv[0]
 		print "\ttodo.py ls -- Display all the todos"
-		print "\ttodo.py add <texte> -- Add a todo, the text may contain #hastags"
+		print "\ttodo.py add <texte> -- Add a todo, the text may contain #hastags, +contexts or @peoples"
 		print "\ttodo.py rm #number -- Removes a todo"
+		print "\ttodo.py sh hastag -- Prints all the todos with the given #hashtag"
+		print "\ttodo.py sc context -- Prints all the todos with the given +context"
+		print "\ttodo.py sp person -- Prints all the todos with the given @person"
 	elif len(sys.argv) == 2:
 		if sys.argv[1] == "ls":
 			t = TodoList(fname)
@@ -249,18 +252,18 @@ if __name__ == "__main__":
 		if sys.argv[1] == "add":
 			t.add_todo(" ".join(sys.argv[2:]))
 			t.save()
-		if sys.argv[1] == "rm":
+		elif sys.argv[1] == "rm":
 			t.remove_todo_by_id(sys.argv[2])
 			t.save()
-		if sys.argv[1] == "sh":
+		elif sys.argv[1] == "sh":
 			l = t.get_todos_by_tag(sys.argv[2])
 			l = t.sort_todos_by_id(l)
 			t.print_todos(l)
-		if sys.argv[1] == "sc":
+		elif sys.argv[1] == "sc":
 			l = t.get_todos_by_tag(sys.argv[2], "+")
 			l = t.sort_todos_by_id(l)
 			t.print_todos(l)
-		if sys.argv[1] == "sp":
+		elif sys.argv[1] == "sp":
 			l = t.get_todos_by_tag(sys.argv[2], "@")
 			l = t.sort_todos_by_id(l)
 			t.print_todos(l)
