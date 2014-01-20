@@ -192,6 +192,8 @@ class TodoList:
 		for i in range(0, len(text)):
 			if text[i][0] == '#':
 				text[i] = colored(text[i], "green")
+			elif text[i][0] == '+':
+				text[i] = colored(text[i], "magenta")
 		return " ".join(text)
 				
 	
