@@ -156,12 +156,24 @@ class TodoList:
 		
 		return None
 	
-	def get_todos_by_tag(self, tag, todo_list=None):
+	def get_todos_by_tag(self, tag):
 		"""
-			Unimplemented yet
+			Search all the todos which match the hashtag given
 		"""
-		if todo_list == None:
-			todo_list = self.todo_list
+		if tag[0] != '#':
+			tag = "#"+tag
+		
+		l = []
+		
+		for e in self.todo_file.firstChild.childNodes:
+			if e.nodeType == e.ELEMENT_NODE:
+				text = e.attributes["task"].value.split(" ")
+				for i in range(0, len(text)):
+					if text[i][0] == '#':
+						if text[i].lower() == tag.lower():
+							l.append(e)
+		
+		return l
 	
 	def sort_todos_by_id(self, todo_list=None):
 		"""
@@ -240,4 +252,8 @@ if __name__ == "__main__":
 		if sys.argv[1] == "rm":
 			t.remove_todo_by_id(sys.argv[2])
 			t.save()
+		if sys.argv[1] == "st":
+			l = t.get_todos_by_tag(sys.argv[2])
+			l = t.sort_todos_by_id(l)
+			t.print_todos(l)
 			
